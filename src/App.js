@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import NewsDescription from './component/NewsDescription';
+import {BrowserRouter as Router,Link,Route} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import FrontPage from './component/FrontPage';
 
 function App() {
+  <Router>
+    {/* <Link to = "/NewsDescription" ></Link> */}
+    {/* <Route exact path="/FrontPage">
+      <FrontPage />
+      </Route> */}
+
+
+  
+    <Route path="/description" component ={NewsDescription}/>
+  </Router>
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FrontPage/>
     </div>
   );
 }

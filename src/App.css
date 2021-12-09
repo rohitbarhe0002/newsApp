@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+.heading{
+  text-decoration: underline;
+
+
+}
+.searchbar{
+  color: red;
+  height: 30px;
+  width: 50px;
+}
