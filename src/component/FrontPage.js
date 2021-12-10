@@ -1,84 +1,79 @@
 import React, { useEffect } from 'react';
-import { ModalTitle } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { settitle } from '../actions';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { Card } from 'antd';
-
+import Card from 'react-bootstrap/Card'
 import { requestbytitle, requestnews } from '../thunk/requestFornews';
-import { Redirect } from 'react-router';
+
 
 
 export default function FrontPage(props) {
 
-    const dispatch = useDispatch();
-   
-    const headlines = useSelector((state) => state.allnews.news);
-    const title = useSelector((state) => state.allnews.title);
-    const titledata = useSelector((state) => state.allnews.titleData);
-    console.log(headlines);
-    console.log(titledata);
-
-    useEffect(() => {
-      dispatch(requestnews());
-    }, []);
-
-   const handleChange =(event) =>{
-   dispatch(settitle(event.target.value));
-    }
-    const history=useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory()
+  const headlines = useSelector((state) => state.allnews.news);
+  const title = useSelector((state) => state.allnews.title);
+  const titledata = useSelector((state) => state.allnews.titleData);
+ 
 
 
-   const handleClick = () =>{
-  
-    // <Redirect to ="/NewsDescription"/>
+
+  useEffect(() => {
+    dispatch(requestnews());
+  }, []);
+
+  const handleChange = (event) => {
+    dispatch(settitle(event.target.value));
+  }
+  const handleClick = () => {
     dispatch(requestbytitle(title))
-    history.push("/description")
+    history.push("/NewsDescription")
   }
 
-    return (
-        <div>
-            
-     <h1 className="heading" >  INDIA LIGHTS</h1>
-   
+  return (
+    <div className="main">
+      <div>
+        <div className>
+        <i className="fas fa-newspaper"></i>
+          <h1 className="heading" >  INDIA LIGHTS</h1> <br />
+          <div class="input-group">
+            <div class="form-outline">
 
-<div class="input-group">
-  <div class="form-outline">
-  <div className="searchbar">
-   <Form className="d-flex">
-        <input type="value"placeholder="Search" className="me-2"aria-label="Search"onChange={handleChange}
-        />
-        <Button variant="outline-primary" onClick={handleClick}>Search</Button>
-      </Form>
+              <div className="searchbar">
+                <Form className="d-flex" style={{
+                  position: 'absolute', left: '50%', top: '50%',
+                  transform: 'translate(-50%, -50%)'
+                }} >
+                  <input type="value" placeholder="Search" className="me-2" aria-label="Search" onChange={handleChange} /><br /><br />
+                  <Button variant="outline-primary" onClick={handleClick}>Search</Button>
+                </Form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        {headlines.map((item) => (
+          <li>{item.articles.map((key) => (
+            <>
+              <Container>
+                <Card className="bg-dark text-white"><br/>
+                  <Card.Img src={key.urlToImage} style={{ width: "95.5%" }} alt="Card image" /><br />
+                  <Card.Title>{key.title}</Card.Title>{key.publishedAt} <li>Author=:{key.author}</li> <li>{key.source.name}</li>
+                </Card>
+              </Container>
+              <a  className="btn btn-primary"  href={key.url}>Read more</a><br/>
+
+            </>
+          ))}</li>
+        ))};
       </div>
-
-</div> 
-</div>
-{headlines && 
-headlines.map((item,index) => {
-    return(
-        <card 
-        key={index}
-        hoverable 
-        style = {{width:"100%"}}
-        cover ={<img alt ="image" src = {item.urlToimage}/>}>
-
-            <Meta title ={item.title} description ={item.content}/>
-            <a href = {item.url} target ="_blank" rel ="noopener npreferrer">
-                <Button type ="primary" style ={{marginTop:"10px"}}>
-                    Read more
-                </Button>
-            </a>
-            </card>
-           
-
-    
-)
-    })}
     </div>
-    )}
+
+  )
+}
 
 
 
@@ -89,17 +84,8 @@ headlines.map((item,index) => {
 
 
 
- {/* {headlines.map((item) =>(
-  <li>{item.articles.map((key) =>(
-  <>
-  <li>title:<a href={key.url}><br/>{key.title}</a></li>
-  <li>Description:<br/>{key.description}</li>
 
-   </>
-   ))}</li>
-))}; 
-  </div>  */}
-      
-    
-    
+
+
+
 

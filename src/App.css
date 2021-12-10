@@ -38,6 +38,7 @@
 }
 .heading{
   text-decoration: underline;
+  color: rgb(218, 197, 171);
 
 
 }
@@ -45,4 +46,18 @@
   color: red;
   height: 30px;
   width: 50px;
+}
+
+.centred{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.main{
+  background-color: black;
+}
+
+.head{
+  background-color: s;
 }
